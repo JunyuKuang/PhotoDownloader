@@ -27,6 +27,9 @@ class DownloaderTableViewController : CoreDataTableViewController<Asset, AssetTa
             tableView.rowHeight = UITableViewAutomaticDimension
         }
         
+        tableView.separatorStyle = .none
+        tableView.allowsSelection = false
+        
         moc.performAndWait {
             let request: NSFetchRequest<Asset> = Asset.fetchRequest()
             request.returnsObjectsAsFaults = true
@@ -50,7 +53,6 @@ class DownloaderTableViewController : CoreDataTableViewController<Asset, AssetTa
             switch state {
             case .waitForStart:
                 navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Start", comment: ""), style: .done, target: self, action: #selector(start))
-                downloader.queue.isSuspended = true
             case .downloading:
                 navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Pause", comment: ""), style: .done, target: self, action: #selector(pause))
                 downloader.queue.isSuspended = false
@@ -89,7 +91,10 @@ class DownloaderTableViewController : CoreDataTableViewController<Asset, AssetTa
         
         let fetchRequest: NSFetchRequest<Asset> = Asset.fetchRequest()
         fetchRequest.predicate = NSPredicate.init(format: "failedToDownload != FALSE OR downloadProgress < 1.0")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Asset.creationDate, ascending: true)]
+        fetchRequest.sortDescriptors = [
+            NSSortDescriptor(keyPath: \Asset.failedToDownload, ascending: true),
+            NSSortDescriptor(keyPath: \Asset.creationDate, ascending: true),
+        ]
         
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsProvider = FetchedResultsProvider(fetchedResultsController: fetchedResultsController) // reload table automatically
@@ -142,6 +147,12 @@ class DownloaderTableViewController : CoreDataTableViewController<Asset, AssetTa
     func downloader(_ downloader: Downloader, update completeCount: Int, taskCount: Int) {
         DispatchQueue.main.async {
             self.title = "\(completeCount) / \(taskCount)"
+        }
+    }
+    
+    func downloaderDidFinish(_ downloader: Downloader) {
+        DispatchQueue.main.async {
+            self.state = .waitForStart
         }
     }
 }

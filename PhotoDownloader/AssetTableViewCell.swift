@@ -36,18 +36,18 @@ class AssetTableViewCell : UITableViewCell {
             let dateString = DateFormatter.localizedString(from: asset.creationDate ?? Date(),
                                                            dateStyle: .medium,
                                                            timeStyle: .medium)
-            
             textLabel?.text = [dateString,
                                phAsset.mediaType.kjy_description,
                                phAsset.sourceType.kjy_description].joined(separator: "\n")
             
             
             if asset.failedToDownload {
-                state = .failed
+                downloadState = .failed
             } else {
-                state = .inProgress(asset.downloadProgress)
+                downloadState = .inProgress(asset.downloadProgress)
             }
             
+            assetIdentifier = phAsset.localIdentifier
             updateThumbnail(for: phAsset)
         }
     }
@@ -57,9 +57,9 @@ class AssetTableViewCell : UITableViewCell {
         case failed
     }
     
-    private var state = DownloadState.inProgress(0) {
+    private var downloadState = DownloadState.inProgress(0) {
         didSet {
-            switch state {
+            switch downloadState {
             case .inProgress(let progress):
                 var frame = contentView.bounds
                 frame.size.width = frame.width * CGFloat(progress)
@@ -82,23 +82,34 @@ class AssetTableViewCell : UITableViewCell {
         }
         
         // force trigger `state.didSet` to update stateIndicationView's frame based on latest contentView size.
-        let state = self.state
-        self.state = state
+        let state = self.downloadState
+        self.downloadState = state
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        textLabel?.text = ""
-        imageView?.image = nil
-        contentView.backgroundColor = nil
-        assetIdentifier = ""
+    enum ThumbnailLoadingState {
+        case loading(identifier: String)
+        case loaded(identifier: String, image: UIImage)
     }
+    
+    var thumbnailLoadingState = ThumbnailLoadingState.loading(identifier: "")
 }
 
 private extension AssetTableViewCell {
     
-    static let thumbnailSize = CGSize(width: 44 * UIScreen.main.scale, height: 44 * UIScreen.main.scale)
+    static let thumbnailPointSize = CGSize(width: 88, height: 88)
+    static let thumbnailPixelSize = CGSize(width: thumbnailPointSize.width * UIScreen.main.scale,
+                                           height: thumbnailPointSize.height * UIScreen.main.scale)
+    static let placeholderImage: UIImage = {
+        let rect = CGRect(origin: .zero, size: thumbnailPointSize)
+        
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = UIScreen.main.scale
+        
+        return UIGraphicsImageRenderer(bounds: rect, format: format).image { context in
+            context.cgContext.setFillColor(UIColor(white: 0.95, alpha: 1).cgColor)
+            context.cgContext.fill(rect)
+        }
+    }()
     
     func fetchPHAsset(with identifier: String) -> PHAsset? {
         
@@ -114,9 +125,27 @@ private extension AssetTableViewCell {
     }
     
     func updateThumbnail(for phAsset: PHAsset) {
-        imageView?.image = nil
         
-        guard phAsset.mediaType == .image else { return }
+        guard phAsset.mediaType == .image else {
+            imageView?.image = AssetTableViewCell.placeholderImage
+            return
+        }
+        
+        // skip if thumbnail is loading or loaded
+        switch thumbnailLoadingState {
+        case .loading(let identifier):
+            if identifier == phAsset.localIdentifier {
+                return
+            }
+        case .loaded(let identifier, let image):
+            if identifier == phAsset.localIdentifier {
+                imageView?.image = image
+                return
+            }
+        }
+        
+        imageView?.image = AssetTableViewCell.placeholderImage
+        thumbnailLoadingState = .loading(identifier: phAsset.localIdentifier)
         
         let options = PHImageRequestOptions()
         options.version = .current
@@ -125,15 +154,21 @@ private extension AssetTableViewCell {
         options.isNetworkAccessAllowed = true
         
         let assetIdentifier = phAsset.localIdentifier
-        self.assetIdentifier = assetIdentifier
         
-        PHImageManager.default().requestImage(for: phAsset, targetSize: AssetTableViewCell.thumbnailSize, contentMode: .aspectFill, options: options) { [weak self] image, _ in
+        PHImageManager.default().requestImage(for: phAsset, targetSize: AssetTableViewCell.thumbnailPixelSize, contentMode: .aspectFill, options: options) { [weak self] image, info in
             
-            guard let image = image,
-                let `self` = self,
-                self.assetIdentifier == assetIdentifier else { return }
+            guard let `self` = self,
+                self.assetIdentifier == assetIdentifier,
+                let image = image,
+                let cgImage = image.cgImage else { return }
             
-            self.imageView?.image = image
+            let imageOrientation = image.imageOrientation
+            let modifiedImage = UIImage(cgImage: cgImage,
+                                        scale: UIScreen.main.scale,
+                                        orientation: imageOrientation)
+            
+            self.imageView?.image = modifiedImage
+            self.thumbnailLoadingState = .loaded(identifier: phAsset.localIdentifier, image: modifiedImage)
         }
     }
 }
@@ -161,11 +196,19 @@ private extension PHAssetSourceType {
         case .typeUserLibrary:
             return NSLocalizedString("Photo Library", comment: "")
         case .typeCloudShared:
-            return NSLocalizedString("iCloud Photo Sharing", comment: "")
+            return NSLocalizedString("From iCloud Photo Sharing\nRequires manual download in Photos app", comment: "")
         case .typeiTunesSynced:
-            return NSLocalizedString("iTunes Synced", comment: "")
+            return NSLocalizedString("From iTunes", comment: "")
         default:
-            return NSLocalizedString("Unknown Source Type", comment: "")
+            return NSLocalizedString("Unknown Source", comment: "")
         }
     }
 }
+
+//class ImageView : UIImageView {
+//
+//    override var intrinsicContentSize: CGSize {
+//        return CGSize(width: 44 * 2, height: 44 * 2)
+//    }
+//}
+

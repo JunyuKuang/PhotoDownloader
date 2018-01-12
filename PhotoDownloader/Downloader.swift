@@ -13,6 +13,7 @@ protocol DownloaderDelegate : class {
     func downloader(_ downloader: Downloader, downloading asset: PHAsset, version: DownloadVersion, downloadProgress: Double)
     func downloader(_ downloader: Downloader, failedToDownload asset: PHAsset, error: Error?)
     func downloader(_ downloader: Downloader, update completeCount: Int, taskCount: Int)
+    func downloaderDidFinish(_ downloader: Downloader)
 }
 
 enum DownloadVersion {
@@ -56,6 +57,9 @@ class Downloader {
         var finishedCount = 0 {
             didSet {
                 delegate?.downloader(self, update: finishedCount, taskCount: sumCount)
+                if finishedCount == sumCount {
+                    delegate?.downloaderDidFinish(self)
+                }
             }
         }
         
