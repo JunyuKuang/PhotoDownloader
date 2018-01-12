@@ -13,6 +13,11 @@
 		27249D8D20088440002C7812 /* PhotoDownloader.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27249D8B20088440002C7812 /* PhotoDownloader.xcdatamodeld */; };
 		27249D8F20088440002C7812 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27249D8E20088440002C7812 /* Assets.xcassets */; };
 		27249D9220088440002C7812 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27249D9020088440002C7812 /* LaunchScreen.storyboard */; };
+		27249D9A20088472002C7812 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27249D9920088472002C7812 /* Downloader.swift */; };
+		27249D9C20088502002C7812 /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27249D9B20088502002C7812 /* CoreDataTableViewController.swift */; };
+		27249D9E20088509002C7812 /* FetchedResultsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27249D9D20088509002C7812 /* FetchedResultsProvider.swift */; };
+		27249DA02008850F002C7812 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27249D9F2008850F002C7812 /* TableViewController.swift */; };
+		27249DA320088810002C7812 /* DownloaderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27249DA220088810002C7812 /* DownloaderTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,11 @@
 		27249D8E20088440002C7812 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27249D9120088440002C7812 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		27249D9320088440002C7812 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27249D9920088472002C7812 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
+		27249D9B20088502002C7812 /* CoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataTableViewController.swift; sourceTree = "<group>"; };
+		27249D9D20088509002C7812 /* FetchedResultsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsProvider.swift; sourceTree = "<group>"; };
+		27249D9F2008850F002C7812 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		27249DA220088810002C7812 /* DownloaderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloaderTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +68,9 @@
 			children = (
 				27249D8420088440002C7812 /* AppDelegate.swift */,
 				27249D8620088440002C7812 /* ViewController.swift */,
+				27249D9920088472002C7812 /* Downloader.swift */,
+				27249DA220088810002C7812 /* DownloaderTableViewController.swift */,
+				27249DA12008851B002C7812 /* CoreDataTableView */,
 				27249D8820088440002C7812 /* Main.storyboard */,
 				27249D8E20088440002C7812 /* Assets.xcassets */,
 				27249D9020088440002C7812 /* LaunchScreen.storyboard */,
@@ -65,6 +78,16 @@
 				27249D8B20088440002C7812 /* PhotoDownloader.xcdatamodeld */,
 			);
 			path = PhotoDownloader;
+			sourceTree = "<group>";
+		};
+		27249DA12008851B002C7812 /* CoreDataTableView */ = {
+			isa = PBXGroup;
+			children = (
+				27249D9B20088502002C7812 /* CoreDataTableViewController.swift */,
+				27249D9D20088509002C7812 /* FetchedResultsProvider.swift */,
+				27249D9F2008850F002C7812 /* TableViewController.swift */,
+			);
+			path = CoreDataTableView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,7 +163,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				27249D8D20088440002C7812 /* PhotoDownloader.xcdatamodeld in Sources */,
+				27249DA02008850F002C7812 /* TableViewController.swift in Sources */,
 				27249D8720088440002C7812 /* ViewController.swift in Sources */,
+				27249D9A20088472002C7812 /* Downloader.swift in Sources */,
+				27249DA320088810002C7812 /* DownloaderTableViewController.swift in Sources */,
+				27249D9E20088509002C7812 /* FetchedResultsProvider.swift in Sources */,
+				27249D9C20088502002C7812 /* CoreDataTableViewController.swift in Sources */,
 				27249D8520088440002C7812 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,6 +309,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FF973S8UP2;
 				INFOPLIST_FILE = PhotoDownloader/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jonny.PhotoDownloader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -296,6 +325,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FF973S8UP2;
 				INFOPLIST_FILE = PhotoDownloader/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jonny.PhotoDownloader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
