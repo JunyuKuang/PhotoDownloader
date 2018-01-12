@@ -59,7 +59,7 @@ public extension NSManagedObjectContext {
             do {
                 try self.save()
             } catch {
-                dprint("Save error:", error)
+                print("Save error:", error)
             }
         }
         if isSynchronous {

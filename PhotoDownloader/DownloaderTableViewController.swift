@@ -40,31 +40,11 @@ class DownloaderTableViewController : CoreDataTableViewController<Asset, AssetTa
     }
     
     override func bind(cell: AssetTableViewCell, withObject object: Asset) {
-        
+        cell.asset = object
     }
     
-    override func didSelect(_ object: ReadingItem, at indexPath: IndexPath) {
-        guard let readerContainer = readerContainer else { return }
-        let readingItem = object
-        let url = readingItem.url
+    override func didSelect(_ object: Asset, at indexPath: IndexPath) {
         
-        let completionHandler = { [weak self] (isCompleted: Bool) in
-            guard let `self` = self,
-                let indexPath = self.tableView.indexPathForSelectedRow else { return }
-            self.tableView.deselectRow(at: indexPath, animated: self.view.window != nil)
-        }
-        
-        if let currentReaderController = readerContainer.readerViewControllers.last,
-            currentReaderController.shortURL == url,
-            currentReaderController.readingItem == readingItem
-        {
-            readerContainer.setActiveChild(.detail, animated: true, completionHandler: completionHandler)
-        } else {
-            readerContainer.showReader(withURL: url, readingItem: readingItem, completionHandler: completionHandler)
-        }
     }
 }
 
-class AssetTableViewCell : UITableViewCell {
-    
-}

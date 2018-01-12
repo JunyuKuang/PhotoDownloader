@@ -18,6 +18,7 @@
 		27249D9E20088509002C7812 /* FetchedResultsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27249D9D20088509002C7812 /* FetchedResultsProvider.swift */; };
 		27249DA02008850F002C7812 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27249D9F2008850F002C7812 /* TableViewController.swift */; };
 		27249DA320088810002C7812 /* DownloaderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27249DA220088810002C7812 /* DownloaderTableViewController.swift */; };
+		27249DA520088C96002C7812 /* AssetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27249DA420088C96002C7812 /* AssetTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		27249D9D20088509002C7812 /* FetchedResultsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsProvider.swift; sourceTree = "<group>"; };
 		27249D9F2008850F002C7812 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		27249DA220088810002C7812 /* DownloaderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloaderTableViewController.swift; sourceTree = "<group>"; };
+		27249DA420088C96002C7812 /* AssetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 			children = (
 				27249D8420088440002C7812 /* AppDelegate.swift */,
 				27249D8620088440002C7812 /* ViewController.swift */,
+				27249DA420088C96002C7812 /* AssetTableViewCell.swift */,
 				27249D9920088472002C7812 /* Downloader.swift */,
 				27249DA220088810002C7812 /* DownloaderTableViewController.swift */,
 				27249DA12008851B002C7812 /* CoreDataTableView */,
@@ -167,6 +170,7 @@
 				27249D8720088440002C7812 /* ViewController.swift in Sources */,
 				27249D9A20088472002C7812 /* Downloader.swift in Sources */,
 				27249DA320088810002C7812 /* DownloaderTableViewController.swift in Sources */,
+				27249DA520088C96002C7812 /* AssetTableViewCell.swift in Sources */,
 				27249D9E20088509002C7812 /* FetchedResultsProvider.swift in Sources */,
 				27249D9C20088502002C7812 /* CoreDataTableViewController.swift in Sources */,
 				27249D8520088440002C7812 /* AppDelegate.swift in Sources */,
