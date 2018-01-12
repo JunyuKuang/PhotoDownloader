@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2701149B2008C3C7005B7B14 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2701149A2008C3C7005B7B14 /* CoreData.swift */; };
 		27249D8520088440002C7812 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27249D8420088440002C7812 /* AppDelegate.swift */; };
-		27249D8720088440002C7812 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27249D8620088440002C7812 /* ViewController.swift */; };
-		27249D8A20088440002C7812 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27249D8820088440002C7812 /* Main.storyboard */; };
 		27249D8D20088440002C7812 /* PhotoDownloader.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27249D8B20088440002C7812 /* PhotoDownloader.xcdatamodeld */; };
 		27249D8F20088440002C7812 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27249D8E20088440002C7812 /* Assets.xcassets */; };
 		27249D9220088440002C7812 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27249D9020088440002C7812 /* LaunchScreen.storyboard */; };
@@ -22,10 +21,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2701149A2008C3C7005B7B14 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		27249D8120088440002C7812 /* PhotoDownloader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoDownloader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27249D8420088440002C7812 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		27249D8620088440002C7812 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		27249D8920088440002C7812 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		27249D8C20088440002C7812 /* PhotoDownloader.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PhotoDownloader.xcdatamodel; sourceTree = "<group>"; };
 		27249D8E20088440002C7812 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27249D9120088440002C7812 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -69,28 +67,27 @@
 			isa = PBXGroup;
 			children = (
 				27249D8420088440002C7812 /* AppDelegate.swift */,
-				27249D8620088440002C7812 /* ViewController.swift */,
-				27249DA420088C96002C7812 /* AssetTableViewCell.swift */,
 				27249D9920088472002C7812 /* Downloader.swift */,
 				27249DA220088810002C7812 /* DownloaderTableViewController.swift */,
-				27249DA12008851B002C7812 /* CoreDataTableView */,
-				27249D8820088440002C7812 /* Main.storyboard */,
+				27249DA420088C96002C7812 /* AssetTableViewCell.swift */,
+				27249DA12008851B002C7812 /* CoreData */,
 				27249D8E20088440002C7812 /* Assets.xcassets */,
 				27249D9020088440002C7812 /* LaunchScreen.storyboard */,
 				27249D9320088440002C7812 /* Info.plist */,
-				27249D8B20088440002C7812 /* PhotoDownloader.xcdatamodeld */,
 			);
 			path = PhotoDownloader;
 			sourceTree = "<group>";
 		};
-		27249DA12008851B002C7812 /* CoreDataTableView */ = {
+		27249DA12008851B002C7812 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
 				27249D9B20088502002C7812 /* CoreDataTableViewController.swift */,
 				27249D9D20088509002C7812 /* FetchedResultsProvider.swift */,
 				27249D9F2008850F002C7812 /* TableViewController.swift */,
+				2701149A2008C3C7005B7B14 /* CoreData.swift */,
+				27249D8B20088440002C7812 /* PhotoDownloader.xcdatamodeld */,
 			);
-			path = CoreDataTableView;
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,7 +151,6 @@
 			files = (
 				27249D9220088440002C7812 /* LaunchScreen.storyboard in Resources */,
 				27249D8F20088440002C7812 /* Assets.xcassets in Resources */,
-				27249D8A20088440002C7812 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,9 +163,9 @@
 			files = (
 				27249D8D20088440002C7812 /* PhotoDownloader.xcdatamodeld in Sources */,
 				27249DA02008850F002C7812 /* TableViewController.swift in Sources */,
-				27249D8720088440002C7812 /* ViewController.swift in Sources */,
 				27249D9A20088472002C7812 /* Downloader.swift in Sources */,
 				27249DA320088810002C7812 /* DownloaderTableViewController.swift in Sources */,
+				2701149B2008C3C7005B7B14 /* CoreData.swift in Sources */,
 				27249DA520088C96002C7812 /* AssetTableViewCell.swift in Sources */,
 				27249D9E20088509002C7812 /* FetchedResultsProvider.swift in Sources */,
 				27249D9C20088502002C7812 /* CoreDataTableViewController.swift in Sources */,
@@ -180,14 +176,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		27249D8820088440002C7812 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				27249D8920088440002C7812 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		27249D9020088440002C7812 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

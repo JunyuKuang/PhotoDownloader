@@ -107,7 +107,7 @@ class CoreDataTableViewController<ResultType : NSFetchRequestResult, Cell : UITa
                         case .move(let at, let to):
                             tableView.moveRow(at: at, to: to)
                         case .update(let indexPath):
-                            tableView.reloadRows(at: [indexPath], with: .automatic)
+                            tableView.reloadRows(at: [indexPath], with: .none)
                         case .delete(let indexPath):
                             tableView.deleteRows(at: [indexPath], with: .automatic)
                         case .insertSection(let index):
